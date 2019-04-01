@@ -78,7 +78,7 @@ public class Shop {
     }*///speak after:)))
 
     public void addDiscount(Discount discount) {
-        discounts.add(discount);
+       // discounts.add(discount);
 
     }
 
