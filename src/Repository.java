@@ -10,10 +10,12 @@ public class Repository {
     }
 
     public int getId() {
+
         return id;
     }
 
     public int getCapacity() {
+
         return capacity;
     }
 
@@ -38,6 +40,7 @@ public class Repository {
         }
     }
     public void removeGood(Good g,int amount){
+
         getGoods().replace(g,getGoods().get(g) - amount);
     }
 

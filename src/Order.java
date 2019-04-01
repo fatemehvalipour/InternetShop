@@ -3,11 +3,13 @@ import java.util.HashMap;
 
 public class Order {
     private int ID;
+    private Customer customer;
     private String status = "pending";
     public Order(int ID, Customer c){
         this.ID = ID;//??????????????????????????????
+        customer = c;
     }
-    ArrayList <Good> goodOrders= new ArrayList<>();
+    ArrayList <Good> goodOrders = new ArrayList<>();
     public int getID() {
 
         return ID;
