@@ -42,10 +42,15 @@ public class Shop {
     }
 
     public int getIncome() {
+        for(Customer c : getCustomer()){
+            for(Order o : c.getTotalOreders()){
+                Income += o.calculatePrice();//doroste vali bad sub,it dobare bar asase oon benevis
+            }
+        }
         return Income;
     }
 
-    public void setIncome(int Income) {
+    public void setIncome(int Income) {//voice hast
         this.Income = Income;
 
     }

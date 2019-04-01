@@ -32,11 +32,6 @@ public class Order {
 
     public void removeItem(Good good) {
         getItems().remove(good);
-        /*for(int i = 0; i < goodOrders.size() ; i++){
-            if(good.getID() == goodOrders.get(i).getID()){
-                goodOrders.remove(goodOrders.get(i));
-            }
-        }*/
     }
 
     public HashMap<Good , Integer> getItems() {
@@ -46,7 +41,6 @@ public class Order {
 
     public int calculatePrice() {
         int totalPrice = 0;
-        //Set<Good> keySet = getItems().keySet();
         for(Good key : getItems().keySet()){
             totalPrice += key.getPrice() * getItems().get(key);
         }

@@ -82,35 +82,52 @@ public class Main {
 
             }
             if(reqAdd.equals("discount")){
-                int discountID = scan.nextInt();
-                int discountPercent = scan.nextInt();
+                int discountID = scan.nextInt();//???
+                int discountPercent = scan.nextInt();//????????
             }
         }
         if(req.equals("report")){
             String reqReport = scan.nextLine();
             if(reqReport.equals("customers")){
-
+                Customer[] CustomerArray = new Customer[shop.getCustomer().length];
+                CustomerArray = shop.getCustomer();
+                for(int i = 0 ; i < CustomerArray.length ; i++){
+                    System.out.print(CustomerArray[i].getID() + "," + CustomerArray[i].getName() + "," + CustomerArray[i].getBalance() + "," + CustomerArray[i].getTotalOreders().length + "," /*CustomerArray[i].get*/);
+                    System.out.println();
+                }
             }
             if(reqReport.equals("repositories")){
-
+                /*Repository[] repoArray = new Repository[shop.getRepositories().length];
+                repoArray = shop.getRepositories();*/
+                for(Repository repo  : shop.getRepositories()){
+                    System.out.print(repo.getId() + "," + repo.getCapacity() + "," + repo.getFreeCapacity());
+                }
             }
             if(reqReport.equals("income")){
-
+                // bad az submitted order write it
             }
         }
         if(req.equals("remove")){
             String reqRemove = scan.nextLine();
             if(reqRemove.equals("item")){
-
+                int OrderIDToRemove = scan.nextInt();
+                int goodIDToRemove = scan.nextInt();
             }
         }
         if(req.equals("submit")){
             String reqSubmit = scan.nextLine();
             if(reqSubmit.equals("order")){
-
+                int OrderIDToSubmit = scan.nextInt();
+                for(Order o : mainOrders){
+                    if(OrderIDToSubmit == o.getID()){
+                        o.setStatus("submitted");
+                        break;
+                    }
+                }
             }
             if(reqSubmit.equals("discount")){
-
+                int orderforDiscount = scan.nextInt();
+                int discountID = scan.nextInt();
             }
         }
 
