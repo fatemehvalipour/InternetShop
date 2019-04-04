@@ -50,11 +50,28 @@ public class Shop {
         }
         return reposes;
     }
-
+    public Repository[] getRepositoriesCapacity() {
+        int ArraylistSizeR = repositories.size();
+        Repository[] reposes = new Repository[ArraylistSizeR];
+        for (int i = 0; i < ArraylistSizeR; i++) {
+            reposes[i] = repositories.get(i);
+        }
+        Repository repo = null;
+        for(int i = 0 ; i <reposes.length ; i++){
+            for(int j = 1 ; j < reposes.length - i ;j++){
+                if(reposes[j].getCapacity() > reposes[j+1].getCapacity()){
+                    repo = reposes[j];
+                    reposes[j] = reposes[j+1];
+                    reposes[j+1] = repo;
+                }
+            }
+        }
+        return reposes;
+    }
     public int getIncome() {
         for(Customer c : getCustomer()){
-            for(Order o : c.getTotalOreders()){
-                Income += o.calculatePrice();//doroste vali bad submit dobare bar asase oon benevis
+            for(Order o : c.getSubmittedOrders()){
+                Income += o.calculatePrice();
             }
         }
         return Income;
@@ -80,9 +97,15 @@ public class Shop {
 
     }
 
-    /*public void increamentGood(Good g, int amount) {
-
-    }*///after repository
+    public void increamentGood(Good g, int amount) {
+        Repository[] repo = getRepositoriesCapacity();
+        for(Repository r : repo){
+            if(r.getFreeCapacity() >= amount){
+                r.addGood(g,amount);
+                break;
+            }
+        }
+    }
 
     /*public void addDiscount(Discount d, Order o) {
 

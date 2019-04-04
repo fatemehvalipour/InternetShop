@@ -6,7 +6,6 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Shop shop = new Shop("shop");
         ArrayList <Order> mainOrders = new ArrayList<>();
-        //ArrayList <Repository> mainrepos = new ArrayList<>();
         System.out.println("what do you want to do?");
         System.out.println("1.add");
         System.out.println("2.report");
@@ -90,17 +89,16 @@ public class Main {
             if(reqReport.equals("customers")){
                 Customer[] CustomerArray = shop.getCustomer();
                 for(int i = 0 ; i < CustomerArray.length ; i++){
-                    System.out.print(CustomerArray[i].getID() + "," + CustomerArray[i].getName() + "," + CustomerArray[i].getBalance() + "," + CustomerArray[i].getTotalOreders().length + "," /*CustomerArray[i].get*/);
-                    System.out.println();
+                    System.out.println(CustomerArray[i].getID() + "," + CustomerArray[i].getName() + "," + CustomerArray[i].getBalance() + "," + CustomerArray[i].getTotalOreders().length + "," + CustomerArray[i].getSubmittedOrders().length);
                 }
             }
             if(reqReport.equals("repositories")){
                 for(Repository repo  : shop.getRepositories()){
-                    System.out.print(repo.getId() + "," + repo.getCapacity() + "," + repo.getFreeCapacity());
+                    System.out.println(repo.getId() + "," + repo.getCapacity() + "," + repo.getFreeCapacity());
                 }
             }
             if(reqReport.equals("income")){
-                // bad az submitted order write it
+                System.out.println(shop.getIncome());
             }
         }
         if(req.equals("remove")){
