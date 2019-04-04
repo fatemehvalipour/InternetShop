@@ -11,10 +11,12 @@ public class Customer {
     }
 
     public String getName() {
+
         return name;
     }
 
     public int getID() {
+
         return ID;
     }
 
@@ -39,14 +41,34 @@ public class Customer {
         }
         return totalOrder;
     }
-    /*public Order[] getPendingOrders(){
-
+    public Order[] getPendingOrders(){
+        ArrayList<Order> pendingOrders = new ArrayList<>();
+        for(Order o : getTotalOreders()){
+            if(o.getStatus().equals("pending")){
+                pendingOrders.add(o);
+            }
+        }
+        Order[] pendingOrder = new Order[pendingOrders.size()];
+        for (int i = 0; i < pendingOrders.size(); i++) {
+            pendingOrder[i] = pendingOrders.get(i);
+        }
+        return pendingOrder;
     }
     public Order[] getSubmittedOrders(){
-
+        ArrayList<Order> submittedOrders = new ArrayList<>();
+        for(Order o : getTotalOreders()){
+            if(o.getStatus().equals("submitted")){
+                submittedOrders.add(o);
+            }
+        }
+        Order[] submitOrder = new Order[submittedOrders.size()];
+        for (int i = 0; i < submittedOrders.size(); i++) {
+            submitOrder[i] = submittedOrders.get(i);
+        }
+        return submitOrder;
     }
     public void submitOrder(Order order){
-
-    }*/
+        order.setStatus("submitted");
+    }
 
 }

@@ -6,6 +6,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Shop shop = new Shop("shop");
         ArrayList <Order> mainOrders = new ArrayList<>();
+        //ArrayList <Repository> mainrepos = new ArrayList<>();
         System.out.println("what do you want to do?");
         System.out.println("1.add");
         System.out.println("2.report");
@@ -28,7 +29,7 @@ public class Main {
                 int goodNum = scan.nextInt();
                 Good good = new Good(goodName,goodID,goodPrice);
                 for(int i = 0; i < goodNum ; i++){
-                    shop.addGood(good);
+                    shop.addGood(good);//should be added to repository
                 }
             }
             if(reqAdd.equals("repository")){
@@ -40,8 +41,7 @@ public class Main {
             if(reqAdd.equals("order")){
                 int orderID = scan.nextInt();
                 int CustomerOrderID = scan.nextInt();
-                Customer[] CustomerArray = new Customer[shop.getCustomer().length];
-                CustomerArray = shop.getCustomer();
+                Customer[] CustomerArray = shop.getCustomer();
                 for(int i = 0 ;i < shop.getCustomer().length ; i++){
                     if(CustomerOrderID == CustomerArray[i].getID()){
                         Order order = new Order(orderID,CustomerArray[i]);
@@ -55,8 +55,7 @@ public class Main {
             if(reqAdd.equals("balance")){
                 int balanceID = scan.nextInt();
                 int balance = scan.nextInt();
-                Customer[] CustomerArray = new Customer[shop.getCustomer().length];
-                CustomerArray = shop.getCustomer();
+                Customer[] CustomerArray = shop.getCustomer();
                 for(int i = 0 ;i < shop.getCustomer().length ; i++){
                     if(balanceID == CustomerArray[i].getID()){
                         CustomerArray[i].setBalance(balance);
@@ -89,16 +88,13 @@ public class Main {
         if(req.equals("report")){
             String reqReport = scan.nextLine();
             if(reqReport.equals("customers")){
-                Customer[] CustomerArray = new Customer[shop.getCustomer().length];
-                CustomerArray = shop.getCustomer();
+                Customer[] CustomerArray = shop.getCustomer();
                 for(int i = 0 ; i < CustomerArray.length ; i++){
                     System.out.print(CustomerArray[i].getID() + "," + CustomerArray[i].getName() + "," + CustomerArray[i].getBalance() + "," + CustomerArray[i].getTotalOreders().length + "," /*CustomerArray[i].get*/);
                     System.out.println();
                 }
             }
             if(reqReport.equals("repositories")){
-                /*Repository[] repoArray = new Repository[shop.getRepositories().length];
-                repoArray = shop.getRepositories();*/
                 for(Repository repo  : shop.getRepositories()){
                     System.out.print(repo.getId() + "," + repo.getCapacity() + "," + repo.getFreeCapacity());
                 }
@@ -117,17 +113,42 @@ public class Main {
         if(req.equals("submit")){
             String reqSubmit = scan.nextLine();
             if(reqSubmit.equals("order")){
+                int i = 0;
                 int OrderIDToSubmit = scan.nextInt();
                 for(Order o : mainOrders){
                     if(OrderIDToSubmit == o.getID()){
-                        o.setStatus("submitted");
-                        break;
+                        for(Good g : o.getItems().keySet()){
+                            for(Repository r : shop.getRepositories()){
+                                if(r.getGoods().containsKey(g)) {
+                                    if (o.getItems().get(g) <= r.getGoods().get(g)) {
+                                        i++;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if( i == o.getItems().size() && o.calculatePrice() <= o.getCustomer().getBalance()){
+                            o.getCustomer().submitOrder(o);
+                            o.getCustomer().setBalance(o.getCustomer().getBalance() - o.calculatePrice());
+                            for(Good g : o.getItems().keySet()){
+                                for(Repository r : shop.getRepositories()){
+                                    if(r.getGoods().containsKey(g)) {
+                                        if (o.getItems().get(g) <= r.getGoods().get(g)) {
+                                            r.removeGood(g,o.getItems().get(g));
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+
             }
             if(reqSubmit.equals("discount")){
                 int orderforDiscount = scan.nextInt();
                 int discountID = scan.nextInt();
+                //moooooooooonde
             }
         }
 

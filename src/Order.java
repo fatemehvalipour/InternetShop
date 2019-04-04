@@ -6,10 +6,14 @@ public class Order {
     private Customer customer;
     private String status = "pending";
     public Order(int ID, Customer c){
-        this.ID = ID;//??????????????????????????????
+        this.ID = ID;
         customer = c;
     }
-    ArrayList <Good> goodOrders = new ArrayList<>();
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
     public int getID() {
 
         return ID;
@@ -31,6 +35,7 @@ public class Order {
     }
 
     public void removeItem(Good good) {
+
         getItems().remove(good);
     }
 
@@ -41,6 +46,7 @@ public class Order {
 
     public int calculatePrice() {
         int totalPrice = 0;
+
         for(Good key : getItems().keySet()){
             totalPrice += key.getPrice() * getItems().get(key);
         }

@@ -43,5 +43,5 @@ public class Repository {
 
         getGoods().replace(g,getGoods().get(g) - amount);
     }
-
+//ye method ke repo ha ra bar asase capacity sort kond va array return kond
 }

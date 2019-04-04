@@ -38,13 +38,23 @@ public class Shop {
         for (int i = 0; i < ArraylistSizeR; i++) {
             reposes[i] = repositories.get(i);
         }
+        Repository repo = null;
+        for(int i = 0 ; i <reposes.length ; i++){
+            for(int j = 1 ; j < reposes.length - i ;j++){
+                if(reposes[j].getId() > reposes[j+1].getId()){
+                    repo = reposes[j];
+                    reposes[j] = reposes[j+1];
+                    reposes[j+1] = repo;
+                }
+            }
+        }
         return reposes;
     }
 
     public int getIncome() {
         for(Customer c : getCustomer()){
             for(Order o : c.getTotalOreders()){
-                Income += o.calculatePrice();//doroste vali bad sub,it dobare bar asase oon benevis
+                Income += o.calculatePrice();//doroste vali bad submit dobare bar asase oon benevis
             }
         }
         return Income;
