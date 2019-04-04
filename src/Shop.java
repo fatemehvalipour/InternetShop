@@ -115,10 +115,10 @@ public class Shop {
 
     }*///speak after:)))
 
-    public void addDiscount(Discount discount) {
+    /*public void addDiscount(Discount discount) {
        // discounts.add(discount);
 
-    }
+    }*/
 
 }
 
