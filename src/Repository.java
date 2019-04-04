@@ -39,9 +39,8 @@ public class Repository {
             getGoods().put(g,amount);
         }
     }
-    public void removeGood(Good g,int amount){
+    public void removeGood(Good g,int amount) {
 
-        getGoods().replace(g,getGoods().get(g) - amount);
+        getGoods().replace(g, getGoods().get(g) - amount);
     }
-//ye method ke repo ha ra bar asase capacity sort kond va array return kond
 }

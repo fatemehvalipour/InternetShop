@@ -111,9 +111,10 @@ public class Shop {
 
     }*///after order
 
-    /*public HashMap<Good,Integer> getItemsold() {
-
-    }*///speak after:)))
+    public HashMap<Good,Integer> getItemSold() {
+        HashMap<Good,Integer> itemSold = new HashMap<>();
+        return itemSold;
+    }
 
     /*public void addDiscount(Discount discount) {
        // discounts.add(discount);

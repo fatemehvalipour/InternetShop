@@ -33,6 +33,7 @@ public class Main {
                         shop.addGood(good);//na malmoos
                     }
                     shop.increamentGood(good, goodNum);
+                    shop.getItemSold().put(good,0);
                 }
                 if (reqAdd.equals("repository")) {
                     int repoID = scan.nextInt();
@@ -111,6 +112,20 @@ public class Main {
                 if (reqRemove.equals("item")) {
                     int OrderIDToRemove = scan.nextInt();
                     int goodIDToRemove = scan.nextInt();
+                    Good good = null;
+                    for(Good g : shop.getGoods()){
+                        if(g.getID() == goodIDToRemove){
+                            good = g;
+                            break;
+                        }
+                    }
+                    for(Order o : mainOrders){
+                        if(o.getID() == OrderIDToRemove){
+                            o.removeItem(good);
+                            o.getItems().remove(good);
+                            break;
+                        }
+                    }
                 }
             }
             if (req.equals("submit")) {
@@ -132,12 +147,14 @@ public class Main {
                             }
                             if (i == o.getItems().size() && o.calculatePrice() <= o.getCustomer().getBalance()) {
                                 o.getCustomer().submitOrder(o);
+                                shop.setIncome(shop.getIncome() + o.calculatePrice());
                                 o.getCustomer().setBalance(o.getCustomer().getBalance() - o.calculatePrice());
                                 for (Good g : o.getItems().keySet()) {
                                     for (Repository r : shop.getRepositories()) {
                                         if (r.getGoods().containsKey(g)) {
                                             if (o.getItems().get(g) <= r.getGoods().get(g)) {
                                                 r.removeGood(g, o.getItems().get(g));
+                                                shop.getItemSold().replace(g,o.getItems().get(g));
                                                 break;
                                             }
                                         }
