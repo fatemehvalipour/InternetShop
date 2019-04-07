@@ -5,6 +5,7 @@ public class Order {
     private int ID;
     private Customer customer;
     private String status = "pending";
+    private HashMap <Good,Integer> itemList =  new HashMap<>();
     public Order(int ID, Customer c){
         this.ID = ID;
         customer = c;
@@ -30,7 +31,7 @@ public class Order {
     }
 
     public void addItem(Good good, int amount) {
-        getItems().put(good,amount);
+        itemList.put(good,amount);
 
     }
 
@@ -40,14 +41,14 @@ public class Order {
     }
 
     public HashMap<Good , Integer> getItems() {
-       HashMap <Good,Integer> itemList =  new HashMap<>();
+
        return itemList;
     }
 
     public int calculatePrice() {
         int totalPrice = 0;
 
-        for(Good key : getItems().keySet()){
+        for(Good key : itemList.keySet()){
             totalPrice += key.getPrice() * getItems().get(key);
         }
         return totalPrice;

@@ -8,7 +8,7 @@ public class Shop {
     ArrayList<Repository> repositories = new ArrayList<>();
     ArrayList<Good> goods = new ArrayList<>();
     ArrayList<Discount> discounts = new ArrayList<>();
-
+    private HashMap<Good,Integer> itemSold = new HashMap<>();
     public Shop(String name) {
 
         this.name = name;
@@ -69,21 +69,17 @@ public class Shop {
         return reposes;
     }
     public int getIncome() {
-        for(Customer c : getCustomer()){
-            for(Order o : c.getSubmittedOrders()){
-                Income += o.calculatePrice();
-            }
-        }
         return Income;
     }
 
-    public void setIncome(int Income) {//voice hast
+    public void setIncome(int Income) {
         this.Income = Income;
 
     }
 
     public void addGood(Good g) {
         goods.add(g);
+
 
     }
 
@@ -102,6 +98,8 @@ public class Shop {
         for(Repository r : repo){
             if(r.getFreeCapacity() >= amount){
                 r.addGood(g,amount);
+                getItemSold().put(g,amount);
+                //r.setFreeCapacity(r.getFreeCapacity() - amount);
                 break;
             }
         }
@@ -112,7 +110,6 @@ public class Shop {
     }*///after order
 
     public HashMap<Good,Integer> getItemSold() {
-        HashMap<Good,Integer> itemSold = new HashMap<>();
         return itemSold;
     }
 
@@ -122,4 +119,3 @@ public class Shop {
     }*/
 
 }
-

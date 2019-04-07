@@ -3,10 +3,12 @@ import java.util.HashMap;
 public class Repository {
     private int id;
     private int capacity;
-
-    public Repository(int id, int capacity) {
+    private int FreeCapacity;
+    private HashMap<Good,Integer> getgoods = new HashMap<>();
+    public Repository(int id, int capacity,int FreeCapacity) {
         this.id = id;
         this.capacity = capacity;
+        this.FreeCapacity = FreeCapacity;
     }
 
     public int getId() {
@@ -20,15 +22,21 @@ public class Repository {
     }
 
     public int getFreeCapacity() {
-        int totalnum = 0;
+       /* int totalnum = 0;
         for(Good key : getGoods().keySet()){
             totalnum +=  getGoods().get(key);
-        }
-        int FreeCapacity = capacity - totalnum;
+        }*/
+        //FreeCapacity = capacity - totalnum;
         return FreeCapacity;
     }
+
+    public void setFreeCapacity(int freeCapacity) {
+
+        FreeCapacity = freeCapacity;
+    }
+
     public HashMap<Good,Integer> getGoods(){
-        HashMap<Good,Integer> getgoods = new HashMap<>();
+
         return getgoods;
     }
     public void addGood(Good g,int amount){
@@ -38,9 +46,11 @@ public class Repository {
         }else{
             getGoods().put(g,amount);
         }
+        setFreeCapacity(getFreeCapacity() - amount);
     }
     public void removeGood(Good g,int amount) {
 
         getGoods().replace(g, getGoods().get(g) - amount);
+        setFreeCapacity(getFreeCapacity() + amount);
     }
 }

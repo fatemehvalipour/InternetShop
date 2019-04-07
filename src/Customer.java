@@ -5,7 +5,8 @@ public class Customer {
     private int ID;
     private int Balance;
     ArrayList<Order> orders = new ArrayList<>();
-    public Customer(String name, int ID) {
+
+    public Customer(String name,int ID) {
         this.name = name;
         this.ID = ID;
     }
@@ -68,6 +69,7 @@ public class Customer {
         return submitOrder;
     }
     public void submitOrder(Order order){
+
         order.setStatus("submitted");
     }
 
