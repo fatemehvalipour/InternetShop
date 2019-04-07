@@ -15,6 +15,7 @@ public class Shop {
     }
 
     public void addCustomer(Customer c) {
+
         customer.add(c);
     }
 
@@ -27,6 +28,14 @@ public class Shop {
         return customes;
     }
 
+    public Discount[] getdiscount(){
+        int ArraylistSizeD = discounts.size();
+        Discount[] discount = new Discount[ArraylistSizeD];
+        for (int i = 0; i < ArraylistSizeD; i++) {
+            discount[i] = discounts.get(i);
+        }
+        return discount;
+    }
     public void addRepository(Repository r) {
         repositories.add(r);
 
@@ -105,17 +114,18 @@ public class Shop {
         }
     }
 
-    /*public void addDiscount(Discount d, Order o) {
-
-    }*///after order
+    public void addDiscount(Discount d, Order o) {
+        o.addDiscount(d);
+    }
 
     public HashMap<Good,Integer> getItemSold() {
+
         return itemSold;
     }
 
-    /*public void addDiscount(Discount discount) {
-       // discounts.add(discount);
+    public void addDiscount(Discount discount) {
+       discounts.add(discount);
 
-    }*/
+    }
 
 }

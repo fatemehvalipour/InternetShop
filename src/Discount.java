@@ -9,12 +9,19 @@ public class Discount {
     }
 
     public void setOrder(Order order){
-    this.order = order;
+
+        this.order = order;
     }
     public Order getOrder(){
-    return order;
+
+        return order;
     }
     public int getPercentage(){
+
         return  percent;
+    }
+
+    public int getID() {
+        return ID;
     }
 }

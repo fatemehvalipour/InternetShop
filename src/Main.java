@@ -6,6 +6,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         Shop shop = new Shop("shop");
         ArrayList<Order> mainOrders = new ArrayList<>();
+        ArrayList<Discount> discounts = new ArrayList<>();
         /*System.out.println("what do you want to do?");
         System.out.println("1.add");
         System.out.println("2.report");
@@ -89,8 +90,11 @@ public class Main {
 
                 }
                 if (reqAdd.equals("discount")) {
-                    int discountID = scan.nextInt();//???
-                    int discountPercent = scan.nextInt();//????????
+                    int discountID = scan.nextInt();
+                    int discountPercent = scan.nextInt();
+                    Discount discount = new Discount(discountID,discountPercent);
+                    //discounts.add(discount);
+                    shop.addDiscount(discount);
                 }
             }
             if (req.equals("report")) {
@@ -171,7 +175,20 @@ public class Main {
                 if (reqSubmit.equals("discount")) {
                     int orderforDiscount = scan.nextInt();
                     int discountID = scan.nextInt();
-                    //moooooooooonde
+                    Order order = null;
+                    for(Order o : mainOrders){
+                        if(orderforDiscount == o.getID()){
+                            order = o;
+                            break;
+                        }
+                    }
+                    Discount discount = null;
+                    for(Discount d : shop.getdiscount()){
+                        if(discountID == d.getID()){
+                            d.setOrder(order);
+                            order.addDiscount(d);
+                        }
+                    }
                 }
             }
             if (req.equals("terminate")) {

@@ -5,13 +5,16 @@ public class Order {
     private int ID;
     private Customer customer;
     private String status = "pending";
+    boolean discountOrNot = false;
     private HashMap <Good,Integer> itemList =  new HashMap<>();
+    private Discount discount = null;
     public Order(int ID, Customer c){
         this.ID = ID;
         customer = c;
     }
 
     public Customer getCustomer() {
+
         return customer;
     }
 
@@ -51,14 +54,17 @@ public class Order {
         for(Good key : itemList.keySet()){
             totalPrice += key.getPrice() * getItems().get(key);
         }
+        if(discountOrNot){
+            totalPrice *= ((double)(100 - discount.getPercentage())/(double)100);
+        }
         return totalPrice;
     }
 
-    /*public void addDiscount(Discount discount,int price) {
-        int totalDiscount = (discount.getPercentage() / 100) * price;
-        return totalDiscount;
+    public void addDiscount(Discount discount) {
+        this.discount = discount;
+        discountOrNot = true;
 
-    }*/
+    }
 
 
 }
