@@ -47,24 +47,23 @@ public class Main {
                 if (reqAdd.equals("order")) {
                     int orderID = scan.nextInt();
                     int CustomerOrderID = scan.nextInt();
-                    Customer[] CustomerArray = shop.getCustomer();
-                    for (int i = 0; i < shop.getCustomer().length; i++) {
-                        if (CustomerOrderID == CustomerArray[i].getID()) {
-                            Order order = new Order(orderID, CustomerArray[i]);
-                            CustomerArray[i].addOrder(order);
+                    //Customer[] CustomerArray = shop.getCustomer();
+                    for(Customer c : shop.getCustomer()){
+                        if(CustomerOrderID == c.getID()){
+                            Order order = new Order(orderID, c);
+                            c.addOrder(order);
                             mainOrders.add(order);
                             break;
-
                         }
                     }
                 }
                 if (reqAdd.equals("balance")) {
                     int balanceID = scan.nextInt();
                     int balance = scan.nextInt();
-                    Customer[] CustomerArray = shop.getCustomer();
-                    for (int i = 0; i < shop.getCustomer().length; i++) {
-                        if (balanceID == CustomerArray[i].getID()) {
-                            CustomerArray[i].setBalance(balance);
+                    //Customer[] CustomerArray = shop.getCustomer();
+                    for(Customer c : shop.getCustomer()){
+                        if(balanceID == c.getID()){
+                            c.setBalance(balance);
                         }
                     }
                 }
@@ -100,10 +99,8 @@ public class Main {
             if (req.equals("report")) {
                 String reqReport = scan.nextLine();
                 if (reqReport.equals("customers")) {
-                    Customer[] CustomerArray = shop.getCustomer();
-                    for (int i = 0; i < CustomerArray.length; i++) {
-                        //System.out.println();
-                        System.out.println(CustomerArray[i].getID() + "," + CustomerArray[i].getName() + "," + CustomerArray[i].getBalance() + "," + CustomerArray[i].getTotalOreders().length + "," + CustomerArray[i].getSubmittedOrders().length);
+                    for(Customer c : shop.getCustomer()){
+                        System.out.println(c.getID() + "," + c.getName() + "," + c.getBalance() + "," + c.getTotalOreders().length + "," + c.getSubmittedOrders().length);
                     }
                 }
                 if (reqReport.equals("repositories")) {
